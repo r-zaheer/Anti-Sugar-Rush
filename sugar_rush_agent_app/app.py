@@ -5,7 +5,7 @@ import asyncio
 from core.controller import run_main_with_safety
 from agents import initialize_agents
 from datetime import time,datetime
-from streamlit_javascript import st_javascript
+
 
 
 # ---------------- INIT ----------------
