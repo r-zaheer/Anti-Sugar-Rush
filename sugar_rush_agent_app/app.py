@@ -65,7 +65,7 @@ with tab1:
         breakfast = st.time_input("Breakfast Time", value=time(8, 0))
         lunch = st.time_input("Lunch Time", value=time(13, 0))
         dinner = st.time_input("Dinner Time", value=time(19, 0))
-        current_time = st.time_input("Current Time", value=time(12, 0))
+        current_time = datetime.combine(st.date_input("Current Date"), st.time_input("Current Time", value=time(12, 0))).strftime("%A, %I:%M %p")
 
     submit = st.button("🚀 Run AI Coach")
 
