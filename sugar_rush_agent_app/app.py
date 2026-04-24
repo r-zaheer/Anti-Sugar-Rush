@@ -63,10 +63,10 @@ with tab1:
         last_meal_carbs = st.slider("Last Meal Carbs (g)", 0, 150, 40)
 
     with col2:
-        breakfast = st.time_input("Breakfast Time", value=time(8, 0))
-        lunch = st.time_input("Lunch Time", value=time(13, 0))
-        dinner = st.time_input("Dinner Time", value=time(19, 0))
-        st.subheader("Current Time")
+        breakfast = st.time_input("Preferred Breakfast Time", value=time(8, 0))
+        lunch = st.time_input("Preferred Lunch Time", value=time(13, 0))
+        dinner = st.time_input("Preferred Dinner Time", value=time(19, 0))
+        st.subheader("Current Time")+ st.success
         current_time = datetime.now().strftime("%A, %I:%M %p")
         st.write(current_time)
         
