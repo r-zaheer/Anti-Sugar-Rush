@@ -37,7 +37,7 @@ def interpolate_to_15min(current_glucose: float, predicted_glucose: float) -> li
 
     return points   # [+15min, +30min, +45min, +60min]
 
-def predict_glucose(user_input, history_path=user_history_path, model_path=model_path, user_id='2405'):
+def predict_glucose(user_input, history_path: str= user_history_path, model_path: str=model_path, user_id: str='2405'):
     """
     AI Agent Tool: Predict glucose for next 60 minutes.
 
