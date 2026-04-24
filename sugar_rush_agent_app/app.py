@@ -50,62 +50,55 @@ if "result" not in st.session_state:
     st.session_state.result = None
 
 # ---------------- TAB 1: INPUT ----------------
+now = datetime.now() 
 with tab1:
     st.subheader("Enter Today's Data")
-
     col1, col2 = st.columns(2)
-
     with col1:
         current_glucose = st.number_input(
             "Current Glucose (mg/dL)", min_value=50, max_value=400, value=165
         )
-
         last_meal = st.text_input("Last Meal", "Breakfast")
         last_meal_carbs = st.slider("Last Meal Carbs (g)", 0, 150, 40)
-
     with col2:
         breakfast = st.time_input("Preferred Breakfast Time", value=time(8, 0))
-        lunch = st.time_input("Preferred Lunch Time", value=time(13, 0))
-        dinner = st.time_input("Preferred Dinner Time", value=time(19, 0))
+        lunch     = st.time_input("Preferred Lunch Time",     value=time(13, 0))
+        dinner    = st.time_input("Preferred Dinner Time",    value=time(19, 0))
         current_time = st.text_input(
-        "Current Time",
-        value=datetime.now().strftime("%A, %I:%M %p"),
-        disabled=True
+            "Current Time",
+            value=now.strftime("%A, %I:%M %p"),
+            disabled=True
         )
-        
-        
-    # Convert time to string before passing to payload
-    current_time_str = current_time.strftime("%I:%M %p")   # e.g. "06:30 PM"
-    day_of_week      = now.strftime("%A")                   # e.g. "Saturday"
-    submit = st.button("🚀 Run AI Coach")
 
+    # Convert ALL time objects to strings before building the payload
+    breakfast_str = breakfast.strftime("%I:%M %p")
+    lunch_str     = lunch.strftime("%I:%M %p")
+    dinner_str    = dinner.strftime("%I:%M %p")
+    # current_time is already a string from st.text_input
+
+    submit = st.button("🚀 Run AI Coach")
     if submit:
         user_input = f"""
         current_glucose = {current_glucose}
         last_meal = {last_meal}
-        current_time = f"{day_of_week}, {current_time_str}"
-
+        last_meal_carbs = {last_meal_carbs}g
+        current_time = {current_time}
         weight = {weight}
         height = {height}
         diet = {diet}
-
         usual_meal_times:
-          breakfast = {breakfast}
-          lunch = {lunch}
-          dinner = {dinner}
-
+          breakfast = {breakfast_str}
+          lunch = {lunch_str}
+          dinner = {dinner_str}
         oral_medication = {oral_med}
         insulin = {insulin}
         long_acting_insulin = {long_insulin}
         glp1 = {glp1}
         """
-
         with st.spinner("🧠 Your AI coach is analyzing your data..."):
             result = asyncio.run(run_main_with_safety(user_input, agents))
             st.session_state.result = result
-
         st.success("Analysis complete! Check the AI Coach tab 👉")
-
 # ---------------- TAB 2: AI COACH ----------------
 with tab2:
     st.subheader("🧠 Your AI Coach Recommendations")
