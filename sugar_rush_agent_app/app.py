@@ -66,6 +66,7 @@ with tab1:
         breakfast = st.time_input("Breakfast Time", value=time(8, 0))
         lunch = st.time_input("Lunch Time", value=time(13, 0))
         dinner = st.time_input("Dinner Time", value=time(19, 0))
+        st.subheader("Current Time")
         current_time = datetime.now().strftime("%A, %I:%M %p")
         st.write(current_time)
         
