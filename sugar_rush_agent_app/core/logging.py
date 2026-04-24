@@ -34,7 +34,9 @@ token_counter = TokenCounterPlugin()
 
 # ─── CSV LOGGING SETUP ────────────────────────────────────────────────────────
 
-CSV_LOG_FILE = "logs/agent_runs2.csv"
+CSV_LOG_FILE = "logs/agent_runs.csv"
+# Add this — creates the directory if it doesn't exist
+os.makedirs(os.path.dirname(CSV_LOG_FILE), exist_ok=True)
 CSV_HEADERS  = [
     "timestamp",
     "duration_seconds",
