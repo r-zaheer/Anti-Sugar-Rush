@@ -74,14 +74,16 @@ with tab1:
         )
         
         
-
+    # Convert time to string before passing to payload
+    current_time_str = current_time.strftime("%I:%M %p")   # e.g. "06:30 PM"
+    day_of_week      = now.strftime("%A")                   # e.g. "Saturday"
     submit = st.button("🚀 Run AI Coach")
 
     if submit:
         user_input = f"""
         current_glucose = {current_glucose}
         last_meal = {last_meal}
-        current_time = {current_time}
+        current_time = f"{day_of_week}, {current_time_str}"
 
         weight = {weight}
         height = {height}
