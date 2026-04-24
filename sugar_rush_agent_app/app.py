@@ -67,23 +67,11 @@ with tab1:
         breakfast = st.time_input("Preferred Breakfast Time", value=time(8, 0))
         lunch = st.time_input("Preferred Lunch Time", value=time(13, 0))
         dinner = st.time_input("Preferred Dinner Time", value=time(19, 0))
-        user_time = streamlit_js_eval(
-        js_expressions="""
-        new Date().toLocaleString('en-US', {
-        weekday: 'long',
-        hour: 'numeric',
-        minute: '2-digit',
-        hour12: true
-        })
-        """,
-        key="time"
+        current_time = st.text_input(
+        "Current Time",
+        value=datetime.now().strftime("%A, %I:%M %p"),
+        disabled=True
         )
-        current_time = st.text_input("Current Time", value=user_time, disabled=True)
-        #current_time = st.text_input(
-        #"Current Time",
-        #value=datetime.now().strftime("%A, %I:%M %p"),
-        #disabled=True
-        #)
         
         
 
