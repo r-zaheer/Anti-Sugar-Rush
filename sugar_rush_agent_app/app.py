@@ -5,6 +5,7 @@ import asyncio
 from core.controller import run_main_with_safety
 from agents import initialize_agents
 from datetime import time,datetime
+from streamlit_js_eval import streamlit_js_eval
 
 
 # ---------------- INIT ----------------
@@ -66,12 +67,23 @@ with tab1:
         breakfast = st.time_input("Preferred Breakfast Time", value=time(8, 0))
         lunch = st.time_input("Preferred Lunch Time", value=time(13, 0))
         dinner = st.time_input("Preferred Dinner Time", value=time(19, 0))
-        
-        current_time = st.text_input(
-        "Current Time",
-        value=datetime.now().strftime("%A, %I:%M %p"),
-        disabled=True
+        user_time = streamlit_js_eval(
+        js_expressions="""
+        new Date().toLocaleString('en-US', {
+        weekday: 'long',
+        hour: 'numeric',
+        minute: '2-digit',
+        hour12: true
+        })
+        """,
+        key="time"
         )
+        current_time = st.text_input("Current Time", value=user_time, disabled=True)
+        #current_time = st.text_input(
+        #"Current Time",
+        #value=datetime.now().strftime("%A, %I:%M %p"),
+        #disabled=True
+        #)
         
         
 
